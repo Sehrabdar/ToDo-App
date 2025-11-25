@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const API_URL = 'http://localhost:4000/todos'; // URL of your Express API
+const API_URL = 'http://localhost:4000/todos';
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [newTask, setNewTask] = useState('');
 
-  // Fetch todos on component mount
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
@@ -14,7 +13,6 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // Add new todo
   const addTodo = () => {
     if (!newTask.trim()) return;
     const newTodo = [{ task: newTask, completed: false }];
@@ -31,7 +29,6 @@ function App() {
       .catch(console.error);
   };
 
-  // Toggle completion status
   const toggleComplete = (id) => {
     const todo = todos.find((t) => t.id === id);
     fetch(`${API_URL}/${id}`, {
